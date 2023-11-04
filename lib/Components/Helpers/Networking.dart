@@ -1980,18 +1980,13 @@ class CheckOTPCodeNet {
                 context.read<HomeProvider>().userAccountDetails;
             // print(context.read<HomeProvider>().userAccountDetails);
             // Check the state of the account creation
-            if (RegExp(r"(true|valid)")
-                    .hasMatch(userAccountDetailsFull['account_state']) ||
-                userAccountDetailsFull['account_state']) //Valid account
+            if (!userAccountDetailsFull['isDriverSuspended']) //Valid account
             {
               //! Update the loggin status
               context.read<HomeProvider>().updateLogginStatus(status: 'logged');
               //!...
               Navigator.of(context).pushNamed('/Home');
-            } else if (RegExp(r"(suspended|blocked|deactivated|expelled)")
-                .hasMatch(userAccountDetailsFull[
-                    'account_state'])) //Blocked or suspendGetDailyEarningAndAuthChecks
-            {
+            } else {
               log('Locked account');
             }
           }
@@ -2001,9 +1996,10 @@ class CheckOTPCodeNet {
         // log(response.statusCode.toString());
         showErrorsCheckingCode(context: context);
       }
-    } catch (e) {
+    } catch (e, s) {
       log('33');
       log(e.toString());
+      print(s);
       showErrorsCheckingCode(context: context);
     }
   }
