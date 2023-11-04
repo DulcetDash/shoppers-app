@@ -385,37 +385,11 @@ class GlobalDataFetcher with ChangeNotifier {
           Map responseGot = json.decode(response.body);
 
           if (responseGot['status'] == 'success') {
-            // print(context.read<HomeProvider>().selectedOption);
-            // log(json
-            //     .decode(response.body)[0]['request_type']
-            //     .toString()
-            //     .toLowerCase());
-            context.read<HomeProvider>().updateTripRequestsMetadata(
-                newTripList: responseGot['data']['availableRequests']);
-            // if (context.read<HomeProvider>().selectedOption ==
-            //     json
-            //         .decode(response.body)[0]['request_type']
-            //         .toString()
-            //         .toLowerCase()) {
-            //   //! Remove all the accepted results
-            //   // List results = json.decode(response.body);
-            //   // results.removeWhere((element) =>
-            //   //     element['ride_basic_infos']['isAccepted'] == true);
-            //   //!--
-            //   print(responseGot['availableRequests']);
-            //   context.read<HomeProvider>().updateTripRequestsMetadata(
-            //       newTripList: responseGot['availableRequests']);
-            // } else if (context.read<HomeProvider>().selectedOption ==
-            //     'accepted') {
-            //   // log(json.decode(response.body).toString());
-            //   // List results = json.decode(response.body);
-            //   context.read<HomeProvider>().updateTripRequestsMetadata(
-            //       newTripList: responseGot['takenRequests']);
-            // } else {
-            //   context
-            //       .read<HomeProvider>()
-            //       .updateTripRequestsMetadata(newTripList: []);
-            // }
+            List mergedList = responseGot['data']['takenRequests'];
+            mergedList.addAll(responseGot['data']['availableRequests']);
+            context
+                .read<HomeProvider>()
+                .updateTripRequestsMetadata(newTripList: mergedList);
           }
         } else //No proper result received
         {
