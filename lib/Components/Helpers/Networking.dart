@@ -371,102 +371,64 @@ class GlobalDataFetcher with ChangeNotifier {
       if (context.toString().contains('no widget') == false) {
         if (response.statusCode == 200) //well received
         {
-          // log(response.body.toString());
           //Close the main loader
           context
               .read<HomeProvider>()
               .updateMainLoaderVisibility(option: false);
-          // log(response.body.toString());
-          if (response.body.toString() == '{"response":"no_requests"}' ||
-              response.body.toString() == '{"response":"no_rides"}' ||
-              response.body.toString() == '{"request_status":"no_rides"}' ||
-              response.body.toString() ==
-                  '{"response":"error"}') //No trips found
-          {
-            String responseGot = response.body.toString().contains('response')
-                ? json.decode(response.body)['response']
-                : json.decode(response.body)['request_status'];
-            switch (responseGot) {
-              case 'no_requests':
-                // No rides fetched
-                // log('No rides got');
-                // Empty the ride array
-                context
-                    .read<HomeProvider>()
-                    .updateTripRequestsMetadata(newTripList: []);
-                break;
-              case 'error':
-                //Some error
-                // log('Unexpected errors');
-                // Empty the ride array
-                context
-                    .read<HomeProvider>()
-                    .updateTripRequestsMetadata(newTripList: []);
-                break;
-              default:
-                // Empty the ride array
-                // log('No rides');
-                context
-                    .read<HomeProvider>()
-                    .updateTripRequestsMetadata(newTripList: []);
-            }
-          } else //Most likely got some rides - 100%
-          {
-            if (json.decode(response.body) != false) {
-              // print(context.read<HomeProvider>().selectedOption);
-              // log(json
-              //     .decode(response.body)[0]['request_type']
-              //     .toString()
-              //     .toLowerCase());
-              if (context.read<HomeProvider>().selectedOption ==
-                  json
-                      .decode(response.body)[0]['request_type']
-                      .toString()
-                      .toLowerCase()) {
-                //! Remove all the accepted results
-                List results = json.decode(response.body);
-                // results.removeWhere((element) =>
-                //     element['ride_basic_infos']['isAccepted'] == true);
-                //!--
-                // log(response.body.toString());
-                context
-                    .read<HomeProvider>()
-                    .updateTripRequestsMetadata(newTripList: results);
-              } else if (context.read<HomeProvider>().selectedOption ==
-                  'accepted') {
-                // log(json.decode(response.body).toString());
-                //! Remove all the accepted results
-                List results = json.decode(response.body);
-                results.removeWhere((element) =>
-                    element['ride_basic_infos']['isAccepted'] == false);
-                //!--
-                context
-                    .read<HomeProvider>()
-                    .updateTripRequestsMetadata(newTripList: results);
-              } else {
-                context
-                    .read<HomeProvider>()
-                    .updateTripRequestsMetadata(newTripList: []);
-              }
-            } else //Inconsistent selected options
-            {
-              context
-                  .read<HomeProvider>()
-                  .updateTripRequestsMetadata(newTripList: []);
-            }
+          // print(response.body);
+
+          if (response.body == 'false')
+            return context
+                .read<HomeProvider>()
+                .updateTripRequestsMetadata(newTripList: []);
+
+          Map responseGot = json.decode(response.body);
+
+          if (responseGot['status'] == 'success') {
+            // print(context.read<HomeProvider>().selectedOption);
+            // log(json
+            //     .decode(response.body)[0]['request_type']
+            //     .toString()
+            //     .toLowerCase());
+            context.read<HomeProvider>().updateTripRequestsMetadata(
+                newTripList: responseGot['data']['availableRequests']);
+            // if (context.read<HomeProvider>().selectedOption ==
+            //     json
+            //         .decode(response.body)[0]['request_type']
+            //         .toString()
+            //         .toLowerCase()) {
+            //   //! Remove all the accepted results
+            //   // List results = json.decode(response.body);
+            //   // results.removeWhere((element) =>
+            //   //     element['ride_basic_infos']['isAccepted'] == true);
+            //   //!--
+            //   print(responseGot['availableRequests']);
+            //   context.read<HomeProvider>().updateTripRequestsMetadata(
+            //       newTripList: responseGot['availableRequests']);
+            // } else if (context.read<HomeProvider>().selectedOption ==
+            //     'accepted') {
+            //   // log(json.decode(response.body).toString());
+            //   // List results = json.decode(response.body);
+            //   context.read<HomeProvider>().updateTripRequestsMetadata(
+            //       newTripList: responseGot['takenRequests']);
+            // } else {
+            //   context
+            //       .read<HomeProvider>()
+            //       .updateTripRequestsMetadata(newTripList: []);
+            // }
           }
         } else //No proper result received
         {
-          // log(response.body.toString());
           // Empty the ride array
           context
               .read<HomeProvider>()
               .updateTripRequestsMetadata(newTripList: []);
         }
       }
-    } catch (e) {
+    } catch (e, s) {
       log('14');
       log(e.toString());
+      print(s);
       if (context.toString().contains('no widget') == false) {
         context
             .read<HomeProvider>()
