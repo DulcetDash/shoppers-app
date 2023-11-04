@@ -17,46 +17,43 @@ class RequestCardHelper {
     for (int i = 0; i < locationData.length; i++) {
       //? Essentials
       //1. Suburb
-      // String suburb = locationData[i]['suburb'] != false &&
-      //         locationData[i]['suburb'] != 'false' &&
-      //         locationData[i]['suburb'] != null
-      //     ? locationData[i]['suburb']
-      //     : locationData[i]['location_name'] != false &&
-      //             locationData[i]['location_name'] != 'false' &&
-      //             locationData[i]['location_name'] != null
-      //         ? locationData[i]['location_name']
-      //         : locationData[i]['street_name'] != false &&
-      //                 locationData[i]['street_name'] != 'false' &&
-      //                 locationData[i]['street_name'] != null
-      //             ? locationData[i]['street_name']
-      //             : 'Unclear location';
-      String suburb = 'Suburb';
+      String suburb = locationData[i]['suburb'] != false &&
+              locationData[i]['suburb'] != 'false' &&
+              locationData[i]['suburb'] != null
+          ? locationData[i]['suburb']
+          : locationData[i]['location_name'] != false &&
+                  locationData[i]['location_name'] != 'false' &&
+                  locationData[i]['location_name'] != null
+              ? locationData[i]['location_name']
+              : locationData[i]['street_name'] != false &&
+                      locationData[i]['street_name'] != 'false' &&
+                      locationData[i]['street_name'] != null
+                  ? locationData[i]['street_name']
+                  : 'Unclear location';
+      // String suburb = 'Suburb';
 
       //2. Location name
-      String location_name = 'Location name';
-
-      // = locationData[i]['location_name'] != false &&
-      //         locationData[i]['location_name'] != 'false' &&
-      //         locationData[i]['location_name'] != null
-      //     ? locationData[i]['location_name'] != suburb
-      //         ? locationData[i]['location_name']
-      //         : ''
-      //     : locationData[i]['street_name'] != false &&
-      //             locationData[i]['street_name'] != 'false' &&
-      //             locationData[i]['street_name'] != null
-      //         ? locationData[i]['street_name']
-      //         : '';
+      String location_name = locationData[i]['location_name'] != false &&
+              locationData[i]['location_name'] != 'false' &&
+              locationData[i]['location_name'] != null
+          ? locationData[i]['location_name'] != suburb
+              ? locationData[i]['location_name']
+              : ''
+          : locationData[i]['street_name'] != false &&
+                  locationData[i]['street_name'] != 'false' &&
+                  locationData[i]['street_name'] != null
+              ? locationData[i]['street_name']
+              : '';
 
       //3. Street name
-      String street_name = 'Street name';
-      // = locationData[i]['street_name'] != false &&
-      //         locationData[i]['street_name'] != 'false' &&
-      //         locationData[i]['street_name'] != null
-      //     ? locationData[i]['street_name'] != suburb &&
-      //             locationData[i]['street_name'] != location_name
-      //         ? locationData[i]['street_name']
-      //         : ''
-      //     : '';
+      String street_name = locationData[i]['street_name'] != false &&
+              locationData[i]['street_name'] != 'false' &&
+              locationData[i]['street_name'] != null
+          ? locationData[i]['street_name'] != suburb &&
+                  locationData[i]['street_name'] != location_name
+              ? locationData[i]['street_name']
+              : ''
+          : '';
 
       //? ---
       Widget tempPass = Row(
@@ -104,45 +101,42 @@ class RequestCardHelper {
   Map<String, String> getRealisticPlacesNames({required Map locationData}) {
     //? Essentials
     //1. Suburb
-    String suburb = 'Suburb';
-    // locationData['suburb'] != false &&
-    //         locationData['suburb'] != 'false' &&
-    //         locationData['suburb'] != null
-    //     ? locationData['suburb']
-    //     : locationData['location_name'] != false &&
-    //             locationData['location_name'] != 'false' &&
-    //             locationData['location_name'] != null
-    //         ? locationData['location_name']
-    //         : locationData['street_name'] != false &&
-    //                 locationData['street_name'] != 'false' &&
-    //                 locationData['street_name'] != null
-    //             ? locationData['street_name']
-    //             : 'Unclear location';
+    String suburb = locationData['suburb'] != false &&
+            locationData['suburb'] != 'false' &&
+            locationData['suburb'] != null
+        ? locationData['suburb']
+        : locationData['location_name'] != false &&
+                locationData['location_name'] != 'false' &&
+                locationData['location_name'] != null
+            ? locationData['location_name']
+            : locationData['street_name'] != false &&
+                    locationData['street_name'] != 'false' &&
+                    locationData['street_name'] != null
+                ? locationData['street_name']
+                : 'Unclear location';
 
     //2. Location name
-    String location_name = 'Location name';
-    // = locationData['location_name'] != false &&
-    //         locationData['location_name'] != 'false' &&
-    //         locationData['location_name'] != null
-    //     ? locationData['location_name'] != suburb
-    //         ? locationData['location_name']
-    //         : ''
-    //     : locationData['street_name'] != false &&
-    //             locationData['street_name'] != 'false' &&
-    //             locationData['street_name'] != null
-    //         ? locationData['street_name']
-    //         : '';
+    String location_name = locationData['location_name'] != false &&
+            locationData['location_name'] != 'false' &&
+            locationData['location_name'] != null
+        ? locationData['location_name'] != suburb
+            ? locationData['location_name']
+            : ''
+        : locationData['street_name'] != false &&
+                locationData['street_name'] != 'false' &&
+                locationData['street_name'] != null
+            ? locationData['street_name']
+            : '';
 
     //3. Street name
-    String street_name = 'Street name';
-    // = locationData['street_name'] != false &&
-    //         locationData['street_name'] != 'false' &&
-    //         locationData['street_name'] != null
-    //     ? locationData['street_name'] != suburb &&
-    //             locationData['street_name'] != location_name
-    //         ? locationData['street_name']
-    //         : ''
-    //     : '';
+    String street_name = locationData['street_name'] != false &&
+            locationData['street_name'] != 'false' &&
+            locationData['street_name'] != null
+        ? locationData['street_name'] != suburb &&
+                locationData['street_name'] != location_name
+            ? locationData['street_name']
+            : ''
+        : '';
 
     //? ---
 

@@ -214,7 +214,7 @@ class RequestCard_Delivery extends StatelessWidget {
 
                         Flexible(
                           child: Text(
-                            '${requestData['delivery_basic_infos']['totals_delivery']['total']}',
+                            'N\$${requestData['delivery_basic_infos']['totals_delivery']['total']}',
                             style: TextStyle(
                                 fontFamily: 'MoveBold',
                                 fontSize: 22,
@@ -243,59 +243,7 @@ class RequestCard_Delivery extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        requestData['delivery_basic_infos']['isAccepted']
-                            ? const Text('')
-                            : InkWell(
-                                onTap: context
-                                                .watch<HomeProvider>()
-                                                .declineRequestProcessor[
-                                            'isProcessingRequest'] &&
-                                        context
-                                                    .watch<HomeProvider>()
-                                                    .declineRequestProcessor[
-                                                'request_fp'] ==
-                                            requestData['request_fp']
-                                    ? () {}
-                                    : () {
-                                        // ? Update the temporary ride data
-                                        context
-                                            .read<HomeProvider>()
-                                            .updateTargetedDeclinedRequestPro(
-                                                isBeingProcessed: true,
-                                                request_fp:
-                                                    requestData['request_fp']);
-                                        //...
-                                        DeclineRequestNet declineRequestNet =
-                                            DeclineRequestNet();
-                                        declineRequestNet.exec(
-                                            context: context,
-                                            request_fp:
-                                                requestData['request_fp']);
-                                      },
-                                child: context
-                                                .watch<HomeProvider>()
-                                                .declineRequestProcessor[
-                                            'isProcessingRequest'] &&
-                                        context
-                                                    .watch<HomeProvider>()
-                                                    .declineRequestProcessor[
-                                                'request_fp'] ==
-                                            requestData['request_fp']
-                                    ? const SizedBox(
-                                        width: 20,
-                                        height: 20,
-                                        child: CircularProgressIndicator(
-                                            strokeWidth: 2,
-                                            color:
-                                                Color.fromRGBO(178, 34, 34, 1)))
-                                    : const Text(
-                                        'Decline',
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            color:
-                                                Color.fromRGBO(178, 34, 34, 1)),
-                                      ),
-                              ),
+                        const Text(''),
                         AcceptOrDetailsBtn(
                           tripData: requestData,
                         )
@@ -476,8 +424,7 @@ class OriginDestinationPrest extends StatelessWidget {
                                                   context: context,
                                                   locationData: [
                                                 requestData[
-                                                        'origin_destination_infos']
-                                                    ['pickup_infos']
+                                                    'origin_destination_infos']
                                               ]),
                                         ),
                                       ),

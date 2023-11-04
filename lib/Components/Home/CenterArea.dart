@@ -35,15 +35,11 @@ class _CenterAreaState extends State<CenterArea> {
       color: mainBackgroundColor,
       child: Padding(
           padding: const EdgeInsets.only(top: 7),
-          child: context
-                      .watch<HomeProvider>()
-                      .locationServicesStatus['isLocationServiceEnabled'] &&
+          child: context.watch<HomeProvider>().locationServicesStatus['isLocationServiceEnabled'] &&
                   context
                       .watch<HomeProvider>()
                       .locationServicesStatus['isLocationPermissionGranted'] &&
-                  context
-                          .watch<HomeProvider>()
-                          .locationServicesStatus['isLocationDeniedForever'] ==
+                  context.watch<HomeProvider>().locationServicesStatus['isLocationDeniedForever'] ==
                       false
               ? context.watch<HomeProvider>().tripRequestsData.isNotEmpty
                   ? ListView.separated(
@@ -54,8 +50,9 @@ class _CenterAreaState extends State<CenterArea> {
                                   requestData: context
                                       .read<HomeProvider>()
                                       .tripRequestsData[index])
-                              : context.watch<HomeProvider>().selectedOption ==
-                                      'delivery'
+                              : context.read<HomeProvider>().tripRequestsData[index]
+                                          ['request_type'] ==
+                                      'DELIVERY'
                                   ? RequestCard_Delivery(
                                       requestData: context
                                           .watch<HomeProvider>()
@@ -476,56 +473,7 @@ class RequestCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  requestData['ride_basic_infos']['isAccepted']
-                      ? const Text('')
-                      : InkWell(
-                          onTap: context
-                                          .watch<HomeProvider>()
-                                          .declineRequestProcessor[
-                                      'isProcessingRequest'] &&
-                                  context
-                                              .watch<HomeProvider>()
-                                              .declineRequestProcessor[
-                                          'request_fp'] ==
-                                      requestData['request_fp']
-                              ? () {}
-                              : () {
-                                  // ? Update the temporary ride data
-                                  context
-                                      .read<HomeProvider>()
-                                      .updateTargetedDeclinedRequestPro(
-                                          isBeingProcessed: true,
-                                          request_fp:
-                                              requestData['request_fp']);
-                                  //...
-                                  DeclineRequestNet declineRequestNet =
-                                      DeclineRequestNet();
-                                  declineRequestNet.exec(
-                                      context: context,
-                                      request_fp: requestData['request_fp']);
-                                },
-                          child: context
-                                          .watch<HomeProvider>()
-                                          .declineRequestProcessor[
-                                      'isProcessingRequest'] &&
-                                  context
-                                              .watch<HomeProvider>()
-                                              .declineRequestProcessor[
-                                          'request_fp'] ==
-                                      requestData['request_fp']
-                              ? const SizedBox(
-                                  width: 20,
-                                  height: 20,
-                                  child: CircularProgressIndicator(
-                                      strokeWidth: 2,
-                                      color: Color.fromRGBO(178, 34, 34, 1)))
-                              : const Text(
-                                  'Decline',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: Color.fromRGBO(178, 34, 34, 1)),
-                                ),
-                        ),
+                  const Text(''),
                   AcceptOrDetailsBtn(
                     tripData: requestData,
                   )
