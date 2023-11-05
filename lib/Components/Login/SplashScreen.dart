@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen>
   Watcher watcher = Watcher();
 
   late AnimationController _controller;
-  final double sideLength = 150; //The side of the squre for the logo
+  final double sideLength = 190; //The side of the squre for the logo
   double superSideLength =
       100; //The side of the container above the logo for the scale out
 
@@ -139,7 +139,7 @@ class _SplashScreenState extends State<SplashScreen>
                         height: sideLength,
                         decoration: const BoxDecoration(color: Colors.black),
                         child: Image.asset(
-                          'assets/Images/nejb.png',
+                          'assets/Images/logo_black.png',
                           fit: BoxFit.contain,
                         )),
                   )

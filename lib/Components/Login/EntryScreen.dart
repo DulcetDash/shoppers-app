@@ -45,25 +45,21 @@ class _EntryScreenState extends State<EntryScreen> {
                       child: Column(
                     children: [
                       Container(
-                          width: 100,
+                          width: 200,
                           height: 100,
-                          decoration: BoxDecoration(
-                              // color: Colors.black,
-                              // shape: BoxShape.circle,
-                              ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(200),
                             child: Image.asset(
-                              'assets/Images/nejbb.png',
+                              'assets/Images/logo_white.png',
                               fit: BoxFit.contain,
                             ),
                           )),
                       Expanded(
                           child: Container(
+                        width: MediaQuery.of(context).size.width * 0.4,
                         // decoration: BoxDecoration(border: Border.all(width: 1)),
-                        child: Image.asset(
-                            'assets/Images/driver_entry_image.png',
-                            fit: BoxFit.cover),
+                        child: Image.asset('assets/Images/shopper.png',
+                            fit: BoxFit.fitWidth),
                       )),
                       Container(
                         width: MediaQuery.of(context).size.width,
@@ -73,7 +69,7 @@ class _EntryScreenState extends State<EntryScreen> {
                         child: const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 15),
                             child: FittedBox(
-                              child: Text('Logistics simplified!',
+                              child: Text('Shoppers app',
                                   style: TextStyle(
                                       fontSize: 28,
                                       color: Colors.white,
