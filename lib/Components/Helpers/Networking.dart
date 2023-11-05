@@ -940,17 +940,69 @@ class ConfirmDropoffRequestNet {
     Map<String, String> bundleData = {
       'request_fp': request_fp,
       'driver_fingerprint': context.read<HomeProvider>().user_fingerprint,
-      // 'requestType': context
-      //             .read<HomeProvider>()
-      //             .onlineOfflineData['operation_clearance'] !=
-      //         null
-      //     ? context
-      //         .read<HomeProvider>()
-      //         .onlineOfflineData['operation_clearance']
-      //         .toString()
-      //         .toUpperCase()
-      //     : 'NONE',
-      'requestType': context.read<HomeProvider>().selectedOption,
+    };
+
+    try {
+      http.Response response = await http.post(mainUrl, body: bundleData);
+
+      if (response.statusCode == 200) //Got some results
+      {
+        if (json.decode(response.body)['response'] ==
+            'successfully_confirmed_dropoff') //Successfully confirmed
+        {
+          log(json.decode(response.body).toString());
+          //Close the processor loader
+          //! Remove the tmp selected data
+          Timer(const Duration(milliseconds: 1000), () {
+            if (bundleData['requestType'] == 'RIDE')
+              Navigator.of(context).pop();
+
+            Navigator.of(context).pop(() {
+              //...
+              context.read<HomeProvider>().updateTmpSelectedTripsData(data: {});
+              context.read<HomeProvider>().updateBlurredBackgroundState(
+                  shouldShow: false); //Show blurred background
+            });
+            context.read<HomeProvider>().updateTargetedRequestPro(
+                isBeingProcessed: false, request_fp: '');
+          });
+          // log('confirmed drop off');
+        } else //Unable to cancel for some reasons
+        {
+          //Close the processor loader
+          CloseLoader(context, request_fp, ShouldPop: false);
+          // log('Unable to confirm dropoff');
+          UnableToDo(context);
+        }
+      } else //Has some errors
+      {
+        log(response.statusCode.toString());
+        //Close the processor loader
+        CloseLoader(context, request_fp, ShouldPop: false);
+        log('Unable to confirm dropoff');
+        UnableToDo(context);
+      }
+    } catch (e) {
+      CloseLoader(context, request_fp, ShouldPop: false);
+      log('20');
+      log(e.toString());
+      UnableToDo(context);
+    }
+  }
+
+  //Confirm item drop off
+  Future execItemLevel(
+      {required BuildContext context, required String request_fp}) async {
+    //Init the sound
+    // Sound sound = Sound();
+
+    Uri mainUrl = Uri.parse(Uri.encodeFull(
+        '${context.read<HomeProvider>().bridge}/confirm_item_dropoff'));
+
+    //Assemble the bundle data
+    Map<String, String> bundleData = {
+      'request_fp': request_fp,
+      'driver_fingerprint': context.read<HomeProvider>().user_fingerprint,
       'selectedPackageIndex':
           context.read<HomeProvider>().selectedDropoffPackageIndex.toString()
     };
@@ -1996,7 +2048,7 @@ class ConfirmDoneShoppingRequestNet {
     // Sound sound = Sound();
 
     Uri mainUrl = Uri.parse(Uri.encodeFull(
-        '${context.read<HomeProvider>().bridge}/confirm_doneShopping_request_driver_io'));
+        '${context.read<HomeProvider>().bridge}/confirm_dropoff_request_driver_io'));
 
     //Assemble the bundle data
     Map<String, String> bundleData = {
@@ -2021,11 +2073,24 @@ class ConfirmDoneShoppingRequestNet {
       if (response.statusCode == 200) //Got some results
       {
         if (json.decode(response.body)['response'] ==
-            'successfully_confirmed_doneShopping') //Successfully confirmed
+            'successfully_confirmed_dropoff') //Successfully confirmed
         {
           //Close the processor loader
           CloseLoader(context, request_fp);
-          log('confirmed pickup');
+          //! Remove the tmp selected data
+          Timer(const Duration(milliseconds: 1000), () {
+            if (bundleData['requestType'] == 'RIDE')
+              Navigator.of(context).pop();
+
+            Navigator.of(context).pop(() {
+              //...
+              context.read<HomeProvider>().updateTmpSelectedTripsData(data: {});
+              context.read<HomeProvider>().updateBlurredBackgroundState(
+                  shouldShow: false); //Show blurred background
+            });
+            context.read<HomeProvider>().updateTargetedRequestPro(
+                isBeingProcessed: false, request_fp: '');
+          });
         } else //Unable to cancel for some reasons
         {
           //Close the processor loader

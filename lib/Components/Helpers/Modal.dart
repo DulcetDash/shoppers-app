@@ -670,9 +670,7 @@ class Modal extends StatelessWidget {
                 child: Text(
                   context
                               .read<HomeProvider>()
-                              .onlineOfflineData['operation_clearance']
-                              .toString()
-                              .toUpperCase() ==
+                              .tmpSelectedTripData['request_type'] ==
                           'SHOPPING'
                       ? scope == 'final'
                           ? 'Completed shopping?'
@@ -691,9 +689,7 @@ class Modal extends StatelessWidget {
                         size: 20,
                         color: context
                                     .read<HomeProvider>()
-                                    .onlineOfflineData['operation_clearance']
-                                    .toString()
-                                    .toUpperCase() !=
+                                    .tmpSelectedTripData['request_type'] !=
                                 'RIDE'
                             ? Colors.black
                             : Color.fromRGBO(178, 34, 34, 1)),
@@ -704,9 +700,7 @@ class Modal extends StatelessWidget {
                       child: Text(
                         context
                                     .read<HomeProvider>()
-                                    .onlineOfflineData['operation_clearance']
-                                    .toString()
-                                    .toUpperCase() ==
+                                    .tmpSelectedTripData['request_type'] ==
                                 'RIDE'
                             ? 'By confirming the drop off you confirm that you\’ve taken the passenger up till the final destination.'
                             : context.read<HomeProvider>().tmpSelectedTripData[
@@ -732,9 +726,7 @@ class Modal extends StatelessWidget {
                       ? 'LOADING'
                       : context
                                   .read<HomeProvider>()
-                                  .onlineOfflineData['operation_clearance']
-                                  .toString()
-                                  .toUpperCase() ==
+                                  .tmpSelectedTripData['request_type'] ==
                               'SHOPPING'
                           ? scope == 'final'
                               ? 'Completed'
@@ -742,9 +734,7 @@ class Modal extends StatelessWidget {
                           : 'Confirm dropoff',
                   backgroundColor: context
                               .read<HomeProvider>()
-                              .onlineOfflineData['operation_clearance']
-                              .toString()
-                              .toUpperCase() !=
+                              .tmpSelectedTripData['request_type'] !=
                           'RIDE'
                       ? AppTheme().getPrimaryColor()
                       : Colors.black,
@@ -768,7 +758,8 @@ class Modal extends StatelessWidget {
                           if (scope != 'final') {
                             ConfirmDropoffRequestNet confirmDropoffRequestNet =
                                 ConfirmDropoffRequestNet();
-                            confirmDropoffRequestNet.exec(
+
+                            confirmDropoffRequestNet.execItemLevel(
                                 context: context,
                                 request_fp: context
                                     .read<HomeProvider>()
@@ -776,7 +767,7 @@ class Modal extends StatelessWidget {
                           } else if (context
                                       .read<HomeProvider>()
                                       .selectedOption ==
-                                  'delivery' &&
+                                  '[delivery]' &&
                               scope == 'final') {
                             ConfirmDropoffRequestNet_delivery
                                 confirmDropoffRequestNet =

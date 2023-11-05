@@ -135,17 +135,15 @@ class _TripDetails_DeliveryState extends State<TripDetails_Delivery> {
                                 }, destination: {
                                   'name':
                                       requestCardHelper.getRealisticPlacesNames(
-                                          locationData: tripData[
-                                                  'origin_destination_infos'][
-                                              'pickup_infos'])['location_name'],
+                                              locationData: tripData[
+                                                  'origin_destination_infos'])[
+                                          'location_name'],
                                   'latitude':
                                       tripData['origin_destination_infos']
-                                              ['pickup_infos']['coordinates']
-                                          ['latitude'],
+                                          ['coordinates']['latitude'],
                                   'longitude':
                                       tripData['origin_destination_infos']
-                                              ['pickup_infos']['coordinates']
-                                          ['longitude']
+                                          ['coordinates']['longitude']
                                 }, context: context);
                               }),
                     const Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
@@ -610,8 +608,7 @@ class OriginDestinationPrest extends StatelessWidget {
                                               context: context,
                                               locationData: [
                                             requestData[
-                                                    'origin_destination_infos']
-                                                ['pickup_infos']
+                                                'origin_destination_infos']
                                           ]),
                                     ),
                                   ),

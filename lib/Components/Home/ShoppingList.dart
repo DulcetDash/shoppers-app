@@ -151,16 +151,16 @@ class ProductModel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    productData['isShoped'] = context
+    productData['isCompleted'] = context
             .watch<HomeProvider>()
             .tmpSelectedTripData['delivery_basic_infos']['shopping_list']
-        [indexProduct]['isShoped'];
+        [indexProduct]['isCompleted'];
 
     return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20),
       child: Container(
         child: InkWell(
-          onTap: productData['isShoped'] != null
+          onTap: productData['isCompleted'] != null
               ? () {}
               : isConfirmedPickup == false
                   ? () {}
@@ -271,16 +271,16 @@ class ProductModel extends StatelessWidget {
               ),
               Expanded(child: SizedBox.shrink()),
               badges.Badge(
-                badgeContent: productData['isShoped'] != null
+                badgeContent: productData['isCompleted'] != null
                     ? Icon(
                         Icons.check,
                         size: 15,
-                        color: productData['isShoped'] != null
+                        color: productData['isCompleted'] != null
                             ? Colors.white
                             : Colors.black,
                       )
                     : Icon(Icons.timelapse_sharp, size: 15),
-                badgeColor: productData['isShoped'] != null
+                badgeColor: productData['isCompleted'] != null
                     ? AppTheme().getPrimaryColor()
                     : AppTheme().getGenericGrey(),
                 position: badges.BadgePosition.center(),

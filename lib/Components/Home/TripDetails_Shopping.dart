@@ -145,16 +145,13 @@ class _TripDetails_ShoppingState extends State<TripDetails_Shopping> {
                                             'name': requestCardHelper
                                                     .getRealisticPlacesNames(
                                                         locationData: tripData[
-                                                                'origin_destination_infos']
-                                                            ['pickup_infos'])[
+                                                            'origin_destination_infos'])[
                                                 'location_name'],
                                             'latitude': tripData[
-                                                        'origin_destination_infos']
-                                                    ['pickup_infos']
+                                                    'origin_destination_infos']
                                                 ['coordinates']['latitude'],
                                             'longitude': tripData[
-                                                        'origin_destination_infos']
-                                                    ['pickup_infos']
+                                                    'origin_destination_infos']
                                                 ['coordinates']['longitude']
                                           }
                                         : {
@@ -702,8 +699,7 @@ class OriginDestinationPrest extends StatelessWidget {
                                               context: context,
                                               locationData: [
                                             requestData[
-                                                    'origin_destination_infos']
-                                                ['pickup_infos']
+                                                'origin_destination_infos']
                                           ]),
                                     ),
                                   ),

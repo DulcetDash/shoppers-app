@@ -651,7 +651,7 @@ class HomeProvider with ChangeNotifier {
   //?37. Check if the driver has completed the delivery list - delivery
   bool isTheDeliveryListCompleted({required List packagesList}) {
     List newList = List.from(packagesList);
-    newList.removeWhere((element) => element['isDroped'] != null);
+    newList.removeWhere((element) => element['isCompleted'] != null);
 
     return newList.isEmpty;
   }
@@ -659,7 +659,7 @@ class HomeProvider with ChangeNotifier {
   //?38. Check if the driver has completed the delivery list - shopping
   bool isTheShoppingListCompleted({required List packagesList}) {
     List newList = List.from(packagesList);
-    newList.removeWhere((element) => element['isShoped'] != null);
+    newList.removeWhere((element) => element['isCompleted'] != null);
 
     return newList.isEmpty;
   }

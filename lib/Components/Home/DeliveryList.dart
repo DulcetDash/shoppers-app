@@ -183,15 +183,15 @@ class _PackageModelState extends State<PackageModel> {
   @override
   Widget build(BuildContext context) {
     // log(deliveryData.toString());
-    deliveryData['isDroped'] = context
+    deliveryData['isCompleted'] = context
             .watch<HomeProvider>()
             .tmpSelectedTripData['origin_destination_infos']
-        ['destination_infos'][index]['isDroped'];
+        ['destination_infos'][index]['isCompleted'];
 
     return Container(
       // color: Colors.red,
       child: ListTile(
-        onTap: deliveryData['isDroped'] != null
+        onTap: deliveryData['isCompleted'] != null
             ? () {}
             : isConfirmedPickup == false
                 ? () {}
@@ -225,16 +225,16 @@ class _PackageModelState extends State<PackageModel> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             badges.Badge(
-              badgeContent: deliveryData['isDroped'] != null
+              badgeContent: deliveryData['isCompleted'] != null
                   ? Icon(
                       Icons.check,
                       size: 15,
-                      color: deliveryData['isDroped'] != null
+                      color: deliveryData['isCompleted'] != null
                           ? Colors.white
                           : Colors.black,
                     )
                   : Icon(Icons.timelapse_sharp, size: 15),
-              badgeColor: deliveryData['isDroped'] != null
+              badgeColor: deliveryData['isCompleted'] != null
                   ? AppTheme().getPrimaryColor()
                   : AppTheme().getGenericGrey(),
               position: badges.BadgePosition.center(),
