@@ -32,7 +32,7 @@ class _NewAccountAddiDetailsState extends State<NewAccountAddiDetails> {
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Welcome to Orniss drivers",
+                          Text("Welcome to DulcetDash Shoppers",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontFamily: 'MoveBold',

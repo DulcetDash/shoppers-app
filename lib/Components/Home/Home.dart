@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 // import 'package:onesignal_flutter/onesignal_flutter.dart';
 // import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
@@ -60,6 +61,16 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration(milliseconds: 1)).then(
+        (value) => SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+              systemNavigationBarColor: Colors.black,
+              systemNavigationBarDividerColor: Colors.black,
+              systemNavigationBarIconBrightness: Brightness.light,
+              statusBarColor: Colors.black,
+              statusBarBrightness: Brightness.light,
+              statusBarIconBrightness: Brightness.light,
+            )));
+
     return WillPopScope(
       onWillPop: () async {
         return Future.value(false);

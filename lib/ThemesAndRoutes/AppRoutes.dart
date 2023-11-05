@@ -49,7 +49,7 @@ class _AppGeneralEntryState extends State<AppGeneralEntry> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: true,
         theme: AppTheme.appTheme,
         initialRoute: '/',
         routes: {

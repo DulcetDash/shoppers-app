@@ -52,7 +52,7 @@ class _SupportState extends State<Support> {
             const Padding(
               padding: EdgeInsets.only(left: 15, right: 15),
               child: Text(
-                'If clients left their belonging in your taxi or you need assistance on using The Orniss platform, contact Us.',
+                'If you need assistance on using The DulcetDash platform, contact Us.',
                 style: TextStyle(fontSize: 16),
               ),
             ),
@@ -67,7 +67,7 @@ class _SupportState extends State<Support> {
               height: 35,
             ),
             Options(
-                title: 'Contact Orniss',
+                title: 'Contact DulcetDash',
                 icon: Icon(Icons.phone, color: AppTheme().getSecondaryColor()),
                 isTitleBold: true,
                 actuator: () => _callNumber(phone: '+264814400089')),
