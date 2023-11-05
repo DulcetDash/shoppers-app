@@ -109,14 +109,14 @@ class _SettingsState extends State<Settings> {
                     StagedNumbers(
                       title: context
                                   .watch<HomeProvider>()
-                                  .generalNumbers['trips'] !=
+                                  .generalNumbers['requests'] !=
                               null
                           ? context
                               .watch<HomeProvider>()
-                              .generalNumbers['trips']
+                              .generalNumbers['requests']
                               .toString()
                           : '*',
-                      subTitle: Text('Trips'),
+                      subTitle: Text('Requests'),
                     ),
                     StagedNumbers(
                       title: context

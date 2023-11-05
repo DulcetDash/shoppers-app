@@ -152,11 +152,11 @@ class GetDriverGeneralNumbers {
       {
         // log(response.body.toString());
         Map responseGet = json.decode(response.body);
-        if (responseGet['rides'] != null) //Got something
+        if (responseGet['response'] != null) //Got something
         {
           context
               .read<HomeProvider>()
-              .updateDriverGeneralNumbers(data: responseGet);
+              .updateDriverGeneralNumbers(data: responseGet['response']);
         } else //Error?
         {
           context.read<HomeProvider>().updateDriverGeneralNumbers(data: {});
