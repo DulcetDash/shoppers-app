@@ -482,12 +482,20 @@ class OriginDestinationPrest extends StatelessWidget {
                                                         ['destination_infos']
                                                     .length >
                                                 1,
-                                            child: Text(
-                                              '+${requestData['origin_destination_infos']['destination_infos'].length - 1} more destination${requestData['origin_destination_infos']['destination_infos'].length - 1 > 1 ? 's' : ''}',
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  color: AppTheme()
-                                                      .getSecondaryColor()),
+                                            child: Container(
+                                              alignment: Alignment.centerLeft,
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 10),
+                                                child: Text(
+                                                  '+${requestData['origin_destination_infos']['destination_infos'].length - 1} more destination${requestData['origin_destination_infos']['destination_infos'].length - 1 > 1 ? 's' : ''}',
+                                                  textAlign: TextAlign.left,
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      color: AppTheme()
+                                                          .getSecondaryColor()),
+                                                ),
+                                              ),
                                             ),
                                           )
                                         ],

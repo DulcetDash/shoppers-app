@@ -19,7 +19,7 @@ class HomeProvider with ChangeNotifier {
   // final String bridge ='http://Graphhopper-ClusterLB-2102461283.us-east-1.elb.amazonaws.com';
   final String bridge = 'http://192.168.8.100:9697';
   // final String bridge = 'http://localhost:9697';
-  // final String bridge = 'https://app.ornisstechnologies.com';
+  // final String bridge = 'https://api.dulcetdash.com';
 
   late AnimationController controllerSwicther; //The bottom switcher animator
 
