@@ -336,8 +336,7 @@ class _TripDetails_ShoppingState extends State<TripDetails_Shopping> {
                 topPadding: 35,
               ),
               InkWell(
-                onTap: () =>
-                    PhoneNumberCaller.callNumber(phoneNumber: '061302302'),
+                onTap: () => PhoneNumberCaller.callNumber(phoneNumber: '10111'),
                 child: const ListTile(
                   horizontalTitleGap: 0,
                   leading: Icon(Icons.security,
@@ -851,7 +850,7 @@ class PaymentPassengersStrip extends StatelessWidget {
               ),
               //Amount payment
               Text(
-                  '${tripData['delivery_basic_infos']['totals_delivery']['total']}',
+                  'N\$${tripData['delivery_basic_infos']['totals_delivery']['total']}',
                   style: TextStyle(
                       fontFamily: 'MoveBold',
                       fontSize: 25,

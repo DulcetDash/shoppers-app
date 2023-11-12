@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
+import 'package:shoppers_app/Components/Helpers/SuperHttp.dart';
 import 'package:shoppers_app/Components/Providers/HomeProvider.dart';
 import 'package:shoppers_app/Components/Helpers/PositionConverter.dart';
 
@@ -158,8 +159,9 @@ class LocationOpsHandler with ChangeNotifier {
 
     // log(urlString);
     try {
-      Response response =
-          await post(Uri.parse(Uri.encodeFull(urlString)), body: bundleData);
+      SuperHttp superHttp = SuperHttp();
+      var response = await superHttp.post(Uri.parse(Uri.encodeFull(urlString)),
+          body: bundleData);
 
       if (response.statusCode == 200 &&
           json.decode(response.body).runtimeType != bool) {

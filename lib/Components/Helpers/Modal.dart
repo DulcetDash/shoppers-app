@@ -3,7 +3,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+// import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:shoppers_app/Components/Helpers/AppTheme.dart';
 import 'package:provider/src/provider.dart';
 import 'package:shoppers_app/Components/Helpers/Networking.dart';
@@ -25,7 +25,7 @@ class Modal extends StatelessWidget {
   }
 
   void _callNumber({required String phone}) async {
-    bool? res = await FlutterPhoneDirectCaller.callNumber(phone);
+    // bool? res = await FlutterPhoneDirectCaller.callNumber(phone);
   }
 
   //Return the correct content based on the scenario
@@ -661,7 +661,7 @@ class Modal extends StatelessWidget {
 
       case 'trip_dropoffConfirmation_confirmation':
         return Container(
-          height: 380,
+          height: scope == 'final' ? 380 : 480,
           alignment: Alignment.center,
           child: Column(
             children: [
@@ -721,15 +721,18 @@ class Modal extends StatelessWidget {
               ),
               GenericRectButton(
                   label: context
-                          .watch<HomeProvider>()
-                          .targetRequestProcessor['isProcessingRequest']
+                              .watch<HomeProvider>()
+                              .targetRequestProcessor['isProcessingRequest'] &&
+                          !context
+                              .watch<HomeProvider>()
+                              .targetRequestProcessor['isNotFound']
                       ? 'LOADING'
                       : context
                                   .read<HomeProvider>()
                                   .tmpSelectedTripData['request_type'] ==
                               'SHOPPING'
                           ? scope == 'final'
-                              ? 'Completed'
+                              ? 'Completed shopping'
                               : 'Confirm purchase'
                           : 'Confirm dropoff',
                   backgroundColor: context
@@ -792,6 +795,51 @@ class Modal extends StatelessWidget {
                                     .tmpSelectedTripData['request_fp']);
                           }
                         }),
+              context
+                              .read<HomeProvider>()
+                              .tmpSelectedTripData['request_type'] ==
+                          'SHOPPING' &&
+                      scope != 'final'
+                  ? GenericRectButton(
+                      label:
+                          context.watch<HomeProvider>().targetRequestProcessor[
+                                      'isProcessingRequest'] &&
+                                  context
+                                      .watch<HomeProvider>()
+                                      .targetRequestProcessor['isNotFound']
+                              ? 'LOADING'
+                              : 'Item not found',
+                      backgroundColor: AppTheme().getErrorColor(),
+                      textColor: Colors.white,
+                      labelFontSize: 22,
+                      horizontalPadding: 15,
+                      isArrowShow: false,
+                      actuatorFunctionl: context
+                              .watch<HomeProvider>()
+                              .targetRequestProcessor['isProcessingRequest']
+                          ? () {}
+                          : () {
+                              //? Update the target processing state
+                              context
+                                  .read<HomeProvider>()
+                                  .updateTargetedRequestPro(
+                                      isBeingProcessed: true,
+                                      request_fp: context
+                                          .read<HomeProvider>()
+                                          .tmpSelectedTripData['request_fp']);
+                              //?----
+                              ConfirmDropoffRequestNet
+                                  confirmDropoffRequestNet =
+                                  ConfirmDropoffRequestNet();
+
+                              confirmDropoffRequestNet.execItemLevel(
+                                  context: context,
+                                  request_fp: context
+                                      .read<HomeProvider>()
+                                      .tmpSelectedTripData['request_fp'],
+                                  isItemNotFound: true);
+                            })
+                  : const SizedBox.shrink(),
               GenericRectButton(
                   label: 'Cancel',
                   backgroundColor: Colors.grey.shade300,

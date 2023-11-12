@@ -6,6 +6,8 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shoppers_app/Components/Providers/HomeProvider.dart';
 
 class Watcher with ChangeNotifier {
   // Duration? timerInterval = const Duration(seconds: 2);
@@ -20,6 +22,13 @@ class Watcher with ChangeNotifier {
     //Start the timer
     mainLoop = Timer.periodic(timerInterval!, (Timer t) {
       for (int i = 0; i < actuatorFunctions.length; i++) {
+        if (context.read<HomeProvider>().user_fingerprint == 'NONE' ||
+            context.read<HomeProvider>().user_fingerprint == null ||
+            context.read<HomeProvider>().user_fingerprint == '') {
+          log('No valid context detected! - skipping timer');
+          continue;
+        }
+
         //? Structure
         // {name:'data fetcher name', actuator: Specific class instance child}
         //Call the tmp function

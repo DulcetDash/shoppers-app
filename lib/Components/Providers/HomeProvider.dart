@@ -10,14 +10,15 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/src/provider.dart';
+import 'package:shoppers_app/Components/Helpers/SuperHttp.dart';
 import 'package:shoppers_app/Components/Providers/RegistrationProvider.dart';
 
 //? HOME PROVIDER
 // Will hold all the home related globals - only!
 
 class HomeProvider with ChangeNotifier {
-  // final String bridge = 'http://192.168.1.157:9697';
-  final String bridge = 'https://api.dulcetdash.com';
+  final String bridge = 'http://192.168.8.100:9697';
+  // final String bridge = 'https://api.dulcetdash.com';
 
   late AnimationController controllerSwicther; //The bottom switcher animator
 
@@ -96,6 +97,7 @@ class HomeProvider with ChangeNotifier {
   //...Accepting requests processes
   Map<String, dynamic> targetRequestProcessor = {
     'isProcessingRequest': false, //If a request is being accepted
+    'isNotFound': false, //If the request is not found
     'request_fp': '', //The fingerprint of the request being accepted
   };
   //...Declining requests
@@ -372,9 +374,12 @@ class HomeProvider with ChangeNotifier {
 
   //? 13. Update the targeted requests processor
   void updateTargetedRequestPro(
-      {required bool isBeingProcessed, required String request_fp}) {
+      {required bool isBeingProcessed,
+      required String request_fp,
+      bool isNotFound = false}) {
     targetRequestProcessor['isProcessingRequest'] = isBeingProcessed;
     targetRequestProcessor['request_fp'] = request_fp;
+    targetRequestProcessor['isNotFound'] = isNotFound;
     notifyListeners();
   }
 
@@ -459,7 +464,6 @@ class HomeProvider with ChangeNotifier {
   //? 20. Update entered phone number
   void updateEnteredPhoneNumber({required String phone}) {
     enteredPhoneNumber = phone;
-    log(phone);
     notifyListeners();
   }
 
@@ -587,7 +591,8 @@ class HomeProvider with ChangeNotifier {
     log(bundleData.toString());
 
     try {
-      Response response = await post(mainUrl, body: bundleData);
+      SuperHttp superHttp = SuperHttp();
+      var response = await superHttp.post(mainUrl, body: bundleData);
 
       if (response.statusCode == 200) //Got some results
       {
@@ -614,7 +619,8 @@ class HomeProvider with ChangeNotifier {
     // print(bundleData);
 
     try {
-      Response response = await post(mainUrl, body: bundleData);
+      SuperHttp superHttp = SuperHttp();
+      var response = await superHttp.post(mainUrl, body: bundleData);
 
       if (response.statusCode == 200) //Got some results
       {
@@ -657,8 +663,16 @@ class HomeProvider with ChangeNotifier {
   //?38. Check if the driver has completed the delivery list - shopping
   bool isTheShoppingListCompleted({required List packagesList}) {
     List newList = List.from(packagesList);
-    newList.removeWhere((element) => element['isCompleted'] != null);
+    newList.removeWhere((element) => element['isCompleted'] != true);
 
     return newList.isEmpty;
+  }
+
+  //Check if the shopping list contains some items that are not found
+  bool isTheShoppingListContainsItemsNotFound({required List packagesList}) {
+    List newList = List.from(packagesList);
+    newList.removeWhere((element) => element['isNotFound'] != true);
+
+    return newList.isNotEmpty;
   }
 }

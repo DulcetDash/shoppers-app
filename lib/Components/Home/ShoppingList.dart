@@ -48,7 +48,7 @@ class ShoppingList extends StatelessWidget {
                     ),
                     Expanded(
                       child: Container(
-                        child: Text(
+                        child: const Text(
                           'My shopping list',
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -62,7 +62,7 @@ class ShoppingList extends StatelessWidget {
               ),
             ),
           ),
-          Divider(
+          const Divider(
             height: 0,
             thickness: 1,
           ),
@@ -72,7 +72,13 @@ class ShoppingList extends StatelessWidget {
             color: context.watch<HomeProvider>().isTheShoppingListCompleted(
                     packagesList: requestData['delivery_basic_infos']
                         ['shopping_list'])
-                ? AppTheme().getPrimaryColor()
+                ? context
+                        .watch<HomeProvider>()
+                        .isTheShoppingListContainsItemsNotFound(
+                            packagesList: requestData['delivery_basic_infos']
+                                ['shopping_list'])
+                    ? Colors.yellow
+                    : AppTheme().getPrimaryColor()
                 : requestData['delivery_basic_infos']['didPickupCash'] == true
                     ? AppTheme().getGenericGrey().withOpacity(0.5)
                     : AppTheme().getErrorColor(),
@@ -83,7 +89,14 @@ class ShoppingList extends StatelessWidget {
                 context.watch<HomeProvider>().isTheShoppingListCompleted(
                         packagesList: requestData['delivery_basic_infos']
                             ['shopping_list'])
-                    ? 'Kudos to you! All the items were successfully bought.'
+                    ? context
+                            .watch<HomeProvider>()
+                            .isTheShoppingListContainsItemsNotFound(
+                                packagesList:
+                                    requestData['delivery_basic_infos']
+                                        ['shopping_list'])
+                        ? 'Your shopping list is complete with some missing products'
+                        : 'Kudos to you! All the items were successfully bought.'
                     : requestData['delivery_basic_infos']['didPickupCash'] ==
                             true
                         ? 'Click on the individual items to confirm the purchase.'
@@ -96,7 +109,14 @@ class ShoppingList extends StatelessWidget {
                                 packagesList:
                                     requestData['delivery_basic_infos']
                                         ['shopping_list'])
-                        ? Colors.white
+                        ? context
+                                .watch<HomeProvider>()
+                                .isTheShoppingListContainsItemsNotFound(
+                                    packagesList:
+                                        requestData['delivery_basic_infos']
+                                            ['shopping_list'])
+                            ? Colors.black
+                            : Colors.white
                         : requestData['delivery_basic_infos']
                                     ['didPickupCash'] ==
                                 true
@@ -113,7 +133,7 @@ class ShoppingList extends StatelessWidget {
                     : AppTheme().getFadedOpacityValue(),
             child: Container(
               child: ListView.separated(
-                  padding: EdgeInsets.only(left: 0, right: 0, top: 35),
+                  padding: const EdgeInsets.only(left: 0, right: 0, top: 35),
                   itemBuilder: (context, index) {
                     return ProductModel(
                         productData: requestData['delivery_basic_infos']
@@ -122,7 +142,7 @@ class ShoppingList extends StatelessWidget {
                         isConfirmedPickup: requestData['delivery_basic_infos']
                             ['didPickupCash']);
                   },
-                  separatorBuilder: (context, index) => Divider(
+                  separatorBuilder: (context, index) => const Divider(
                         height: 50,
                       ),
                   itemCount: requestData['delivery_basic_infos']
@@ -155,6 +175,10 @@ class ProductModel extends StatelessWidget {
             .watch<HomeProvider>()
             .tmpSelectedTripData['delivery_basic_infos']['shopping_list']
         [indexProduct]['isCompleted'];
+    productData['isNotFound'] = context
+            .watch<HomeProvider>()
+            .tmpSelectedTripData['delivery_basic_infos']['shopping_list']
+        [indexProduct]['isNotFound'];
 
     return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20),
@@ -224,12 +248,12 @@ class ProductModel extends StatelessWidget {
                       ),
                     ),
                     errorWidget: (context, url, error) => const Icon(
-                      Icons.error,
-                      size: 30,
+                      Icons.photo,
+                      size: 35,
                       color: Colors.grey,
                     ),
                   )),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Container(
@@ -242,9 +266,10 @@ class ProductModel extends StatelessWidget {
                       productData['name'],
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontSize: 14, fontFamily: 'MoveText'),
+                      style:
+                          const TextStyle(fontSize: 14, fontFamily: 'MoveText'),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Text(
@@ -254,11 +279,11 @@ class ProductModel extends StatelessWidget {
                           fontSize: 16,
                           fontFamily: 'MoveTextMedium'),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 7,
                     ),
                     Text(
-                      productData['price'],
+                      'N\$${productData['price']}',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
@@ -269,20 +294,10 @@ class ProductModel extends StatelessWidget {
                   ],
                 ),
               ),
-              Expanded(child: SizedBox.shrink()),
+              const Expanded(child: SizedBox.shrink()),
               badges.Badge(
-                badgeContent: productData['isCompleted'] != null
-                    ? Icon(
-                        Icons.check,
-                        size: 15,
-                        color: productData['isCompleted'] != null
-                            ? Colors.white
-                            : Colors.black,
-                      )
-                    : Icon(Icons.timelapse_sharp, size: 15),
-                badgeColor: productData['isCompleted'] != null
-                    ? AppTheme().getPrimaryColor()
-                    : AppTheme().getGenericGrey(),
+                badgeContent: getProductCompletionStatus()['icon'],
+                badgeColor: getProductCompletionStatus()['badgeColor'],
                 position: badges.BadgePosition.center(),
                 child: null,
               ),
@@ -291,6 +306,29 @@ class ProductModel extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Map getProductCompletionStatus() {
+    bool isCompleted = productData['isCompleted'] ?? false;
+    bool isNotFound = productData['isNotFound'] ?? false;
+
+    if (isNotFound) {
+      return {
+        'icon': const Icon(Icons.close, size: 15, color: Colors.white),
+        'badgeColor': AppTheme().getErrorColor(),
+      };
+    } else if (isCompleted) {
+      return {
+        'icon': const Icon(Icons.check, size: 15, color: Colors.white),
+        'badgeColor': AppTheme().getPrimaryColor(),
+      };
+    } else {
+      return {
+        'icon':
+            const Icon(Icons.timelapse_sharp, size: 15, color: Colors.black),
+        'badgeColor': AppTheme().getGenericGrey(),
+      };
+    }
   }
 
   //Get the number of items

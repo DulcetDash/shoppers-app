@@ -1,10 +1,10 @@
 // ignore_for_file: file_names
 
-import 'package:audioplayers/audioplayers.dart';
+// import 'package:audioplayers/audioplayers.dart';
 
 class Sound {
   void playSound({String audio = 'notification.mp3'}) {
-    AudioCache player = AudioCache();
+    // AudioCache player = AudioCache();
 
     //Audios
     //1. Notifications: notification.mp3
@@ -12,6 +12,6 @@ class Sound {
     //3. Going online success: success.mp3
 
     String audioPath = audio;
-    player.play(audioPath, isNotification: true);
+    // player.play(audioPath, isNotification: true);
   }
 }

@@ -4,7 +4,8 @@ import 'dart:developer';
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_mapbox_navigation/library.dart';
+import 'package:flutter_mapbox_navigation/flutter_mapbox_navigation.dart';
+// import 'package:flutter_mapbox_navigation/library.dart';
 import 'package:provider/src/provider.dart';
 import 'package:shoppers_app/Components/Providers/HomeProvider.dart';
 

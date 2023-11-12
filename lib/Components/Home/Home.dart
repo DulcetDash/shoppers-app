@@ -6,8 +6,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'package:onesignal_flutter/onesignal_flutter.dart';
-// import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shoppers_app/Components/Helpers/LocationOpsHandler.dart';
 import 'package:shoppers_app/Components/Helpers/Networking.dart';
@@ -36,26 +35,26 @@ class _HomeState extends State<Home> {
       setState(() {
         refresher = 100;
       });
-      // OneSignal.shared.setAppId("0737fba5-c408-4cc9-a16f-80261325e648");
+      OneSignal.shared.setAppId("31e2a394-bd46-47ce-9196-910abfdf45cf");
 
-      // // The promptForPushNotificationsWithUserResponse function will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
-      // OneSignal.shared
-      //     .promptUserForPushNotificationPermission()
-      //     .then((accepted) {
-      //   // print("Accepted permission: $accepted");
-      // });
+      // The promptForPushNotificationsWithUserResponse function will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
+      OneSignal.shared
+          .promptUserForPushNotificationPermission()
+          .then((accepted) {
+        // print("Accepted permission: $accepted");
+      });
 
-      // OneSignal.shared
-      //     .setSubscriptionObserver((OSSubscriptionStateChanges changes) {
-      //   // Will be called whenever the subscription changes
-      //   // (ie. user gets registered with OneSignal and gets a user ID)
-      //   // print(changes);
-      // });
-      // OneSignal.shared.getDeviceState().then((deviceState) {
-      //   context.read<HomeProvider>().updatePushnotification_token(
-      //       data: json.decode(deviceState?.jsonRepresentation() as String));
-      //   // print("DeviceState: ${deviceState?.jsonRepresentation()}");
-      // });
+      OneSignal.shared
+          .setSubscriptionObserver((OSSubscriptionStateChanges changes) {
+        // Will be called whenever the subscription changes
+        // (ie. user gets registered with OneSignal and gets a user ID)
+        // print(changes);
+      });
+      OneSignal.shared.getDeviceState().then((deviceState) {
+        // context.read<HomeProvider>().updatePushnotification_token(
+        //     data: json.decode(deviceState?.jsonRepresentation() as String));
+        print("DeviceState: ${deviceState?.jsonRepresentation()}");
+      });
     });
   }
 

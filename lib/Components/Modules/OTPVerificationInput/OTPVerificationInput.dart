@@ -62,7 +62,7 @@ class _OTPVerificationInputState extends State<OTPVerificationInput> {
             checkOTPCodeNet.exec(context: context);
           },
           onChanged: (value) {
-            // print(value);
+            context.read<HomeProvider>().updateOTPValueData(data: value);
           },
           beforeTextPaste: (text) {
             // print("Allowing to paste $text");

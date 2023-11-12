@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+// import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:shoppers_app/Components/Helpers/AppTheme.dart';
 
 class Support extends StatefulWidget {
@@ -84,7 +84,7 @@ class _SupportState extends State<Support> {
   }
 
   void _callNumber({required String phone}) async {
-    bool? res = await FlutterPhoneDirectCaller.callNumber(phone);
+    // bool? res = await FlutterPhoneDirectCaller.callNumber(phone);
   }
 }
 

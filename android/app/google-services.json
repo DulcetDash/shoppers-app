@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "197977133555",
+    "project_id": "dulcetdash-drivers",
+    "storage_bucket": "dulcetdash-drivers.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:197977133555:android:9c8544a4f72468940e8286",
+        "android_client_info": {
+          "package_name": "com.drivers.dulcetdash"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpCQ9RU8502n0YAgr6_z0AXocw32TZmeQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

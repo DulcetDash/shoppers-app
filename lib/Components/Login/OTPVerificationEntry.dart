@@ -44,16 +44,17 @@ class _OTPVerificationEntryState extends State<OTPVerificationEntry> {
                         size: 33, color: Colors.black)),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 child: Container(
                     width: MediaQuery.of(context).size.width,
-                    child: Text("Enter the 5-digits code sent you.",
+                    child: const Text("Enter the 5-digits code sent you.",
                         style: TextStyle(
                             fontFamily: 'MoveTextBold',
                             fontSize: 24,
                             color: Colors.black))),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Expanded(
@@ -69,10 +70,15 @@ class _OTPVerificationEntryState extends State<OTPVerificationEntry> {
                   child: Container(
                     height: 100,
                     child: ListTile(
-                      trailing: GenericCircButton(
-                        actuatorFunctionl: () =>
-                            Navigator.pushNamed(context, '/CreateAccountEntry'),
-                      ),
+                      trailing: GenericCircButton(actuatorFunctionl: () {
+                        // Navigator.pushNamed(context, '/CreateAccountEntry');
+                        //Check the otp
+                        context
+                            .read<HomeProvider>()
+                            .updateGenericLoaderShow(state: true);
+                        CheckOTPCodeNet checkOTPCodeNet = CheckOTPCodeNet();
+                        checkOTPCodeNet.exec(context: context);
+                      }),
                     ),
                   ))
             ],

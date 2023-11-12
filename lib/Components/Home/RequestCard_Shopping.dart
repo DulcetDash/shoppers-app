@@ -108,7 +108,7 @@ class RequestCard_Shopping extends StatelessWidget {
                             const Padding(padding: EdgeInsets.only(left: 2)),
                             Text(
                               requestData['delivery_basic_infos']
-                                      ['inRouteToDelivery']
+                                      ['inRouteToShop']
                                   ? 'Picked up'
                                   : requestData['eta_to_passenger_infos']
                                       ['eta'],

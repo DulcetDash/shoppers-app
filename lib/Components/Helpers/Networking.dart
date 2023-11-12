@@ -13,6 +13,7 @@ import 'package:http/http.dart' as http;
 import 'package:shoppers_app/Components/Helpers/Modal.dart';
 import 'package:shoppers_app/Components/Helpers/ModalReg.dart';
 import 'package:shoppers_app/Components/Helpers/Sound.dart';
+import 'package:shoppers_app/Components/Helpers/SuperHttp.dart';
 import 'package:shoppers_app/Components/Providers/HomeProvider.dart';
 import 'package:shoppers_app/Components/Providers/RegistrationProvider.dart';
 
@@ -31,7 +32,8 @@ class getRideHistoryTargeted {
     };
 
     try {
-      http.Response response = await http.post(mainUrl, body: bundleData);
+      SuperHttp superHttp = SuperHttp();
+      var response = await superHttp.post(mainUrl, body: bundleData);
 
       if (response.statusCode == 200) //Got some results
       {
@@ -88,7 +90,8 @@ class getRideHistoryBatch {
     };
 
     try {
-      http.Response response = await http.post(mainUrl, body: bundleData);
+      SuperHttp superHttp = SuperHttp();
+      var response = await superHttp.post(mainUrl, body: bundleData);
 
       if (response.statusCode == 200) //Got some results
       {
@@ -146,7 +149,8 @@ class GetDriverGeneralNumbers {
     };
 
     try {
-      http.Response response = await http.post(mainUrl, body: bundleData);
+      SuperHttp superHttp = SuperHttp();
+      var response = await superHttp.post(mainUrl, body: bundleData);
 
       if (response.statusCode == 200) //Got some results
       {
@@ -186,7 +190,8 @@ class GetOnlineOfflineStatus {
     };
 
     try {
-      http.Response response = await http.post(mainUrl, body: bundleData);
+      SuperHttp superHttp = SuperHttp();
+      var response = await superHttp.post(mainUrl, body: bundleData);
 
       if (response.statusCode == 200) //Got some results
       {
@@ -251,7 +256,8 @@ class SetOnlineOfflineStatus {
     };
 
     try {
-      http.Response response = await http.post(mainUrl, body: bundleData);
+      SuperHttp superHttp = SuperHttp();
+      var response = await superHttp.post(mainUrl, body: bundleData);
 
       if (response.statusCode == 200) //Got some results
       {
@@ -366,7 +372,8 @@ class GlobalDataFetcher with ChangeNotifier {
 
     ///....
     try {
-      http.Response response = await http.post(globalTrips, body: bundleData);
+      SuperHttp superHttp = SuperHttp();
+      var response = await superHttp.post(globalTrips, body: bundleData);
 
       if (context.toString().contains('no widget') == false) {
         if (response.statusCode == 200) //well received
@@ -490,7 +497,8 @@ class AcceptRequestNet {
     };
 
     try {
-      http.Response response = await http.post(mainUrl, body: bundleData);
+      SuperHttp superHttp = SuperHttp();
+      var response = await superHttp.post(mainUrl, body: bundleData);
 
       if (response.statusCode == 200) //Got some results
       {
@@ -613,7 +621,8 @@ class CancelRequestNet {
     };
 
     try {
-      http.Response response = await http.post(mainUrl, body: bundleData);
+      SuperHttp superHttp = SuperHttp();
+      var response = await superHttp.post(mainUrl, body: bundleData);
 
       if (response.statusCode == 200) //Got some results
       {
@@ -754,7 +763,8 @@ class ConfirmPickupRequestNet {
     };
 
     try {
-      http.Response response = await http.post(mainUrl, body: bundleData);
+      SuperHttp superHttp = SuperHttp();
+      var response = await superHttp.post(mainUrl, body: bundleData);
 
       if (response.statusCode == 200) //Got some results
       {
@@ -851,7 +861,8 @@ class DeclineRequestNet {
     };
 
     try {
-      http.Response response = await http.post(mainUrl, body: bundleData);
+      SuperHttp superHttp = SuperHttp();
+      var response = await superHttp.post(mainUrl, body: bundleData);
 
       if (response.statusCode == 200) //Got some results
       {
@@ -943,7 +954,8 @@ class ConfirmDropoffRequestNet {
     };
 
     try {
-      http.Response response = await http.post(mainUrl, body: bundleData);
+      SuperHttp superHttp = SuperHttp();
+      var response = await superHttp.post(mainUrl, body: bundleData);
 
       if (response.statusCode == 200) //Got some results
       {
@@ -992,7 +1004,9 @@ class ConfirmDropoffRequestNet {
 
   //Confirm item drop off
   Future execItemLevel(
-      {required BuildContext context, required String request_fp}) async {
+      {required BuildContext context,
+      required String request_fp,
+      bool isItemNotFound = false}) async {
     //Init the sound
     // Sound sound = Sound();
 
@@ -1004,11 +1018,13 @@ class ConfirmDropoffRequestNet {
       'request_fp': request_fp,
       'driver_fingerprint': context.read<HomeProvider>().user_fingerprint,
       'selectedPackageIndex':
-          context.read<HomeProvider>().selectedDropoffPackageIndex.toString()
+          context.read<HomeProvider>().selectedDropoffPackageIndex.toString(),
+      'isItemNotFound': isItemNotFound.toString()
     };
 
     try {
-      http.Response response = await http.post(mainUrl, body: bundleData);
+      SuperHttp superHttp = SuperHttp();
+      var response = await superHttp.post(mainUrl, body: bundleData);
 
       if (response.statusCode == 200) //Got some results
       {
@@ -1122,7 +1138,8 @@ class ConfirmDropoffRequestNet_delivery {
     };
 
     try {
-      http.Response response = await http.post(mainUrl, body: bundleData);
+      SuperHttp superHttp = SuperHttp();
+      var response = await superHttp.post(mainUrl, body: bundleData);
 
       if (response.statusCode == 200) //Got some results
       {
@@ -1233,7 +1250,8 @@ class GetDailyEarningAndAuthChecks {
     // print(bundleData);
 
     try {
-      http.Response response = await http.post(mainUrl, body: bundleData);
+      SuperHttp superHttp = SuperHttp();
+      var response = await superHttp.post(mainUrl, body: bundleData);
 
       if (response.statusCode == 200) //Got some results
       {
@@ -1832,7 +1850,8 @@ class SendOTPCodeNet {
     // print(bundleData);
 
     try {
-      http.Response response = await http.post(mainUrl, body: bundleData);
+      SuperHttp superHttp = SuperHttp();
+      var response = await superHttp.post(mainUrl, body: bundleData);
 
       context.read<HomeProvider>().updateGenericLoaderShow(state: false);
 
@@ -1930,7 +1949,8 @@ class CheckOTPCodeNet {
     };
 
     try {
-      http.Response response = await http.post(mainUrl, body: bundleData);
+      SuperHttp superHttp = SuperHttp();
+      var response = await superHttp.post(mainUrl, body: bundleData);
 
       context.read<HomeProvider>().updateGenericLoaderShow(state: false);
 
@@ -1939,10 +1959,7 @@ class CheckOTPCodeNet {
         // log(response.body.toString());
         Map responseGot = json.decode(response.body);
 
-        if (responseGot['response'] == false &&
-            context.read<HomeProvider>().userStatus == 'known_user' &&
-            RegExp(r"error").hasMatch(
-                responseGot['response'])) //Some random error happended
+        if (responseGot['response'] == false) //Some random error happended
         {
           log('Wrong code');
           showWrongCodeEntered(context: context);
@@ -2068,7 +2085,8 @@ class ConfirmDoneShoppingRequestNet {
     };
 
     try {
-      http.Response response = await http.post(mainUrl, body: bundleData);
+      SuperHttp superHttp = SuperHttp();
+      var response = await superHttp.post(mainUrl, body: bundleData);
 
       if (response.statusCode == 200) //Got some results
       {
