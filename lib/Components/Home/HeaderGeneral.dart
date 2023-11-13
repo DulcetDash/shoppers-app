@@ -100,46 +100,23 @@ class _HeaderGeneralState extends State<HeaderGeneral> {
                     ? AppTheme().getFadedOpacityValue()
                     : 1,
                 child: InkWell(
-                    onTap: context.watch<HomeProvider>().onlineOfflineData[
-                                'operation_clearance'] !=
-                            null
-                        ? context.watch<HomeProvider>().onlineOfflineData[
-                                        'operation_clearance'] ==
-                                    'RIDE' ||
-                                context.watch<HomeProvider>().onlineOfflineData[
-                                        'operation_clearance'] ==
-                                    'DELIVERY' ||
-                                context.watch<HomeProvider>().onlineOfflineData[
-                                        'operation_clearance'] ==
-                                    'SHOPPING'
-                            ? context.watch<HomeProvider>().onlineOfflineData[
-                                        'operation_clearance'] ==
-                                    null
-                                ? () {}
-                                : () {
-                                    showModalBottomSheet(
-                                        context: context,
-                                        builder: (context) {
-                                          //...
-                                          return Container(
-                                            color: Colors.white,
-                                            child: SafeArea(
-                                                child: Container(
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width,
-                                              color: Colors.white,
-                                              child: Modal(
-                                                  scenario:
-                                                      'rides_main_home_options'),
-                                            )),
-                                          );
-                                        });
-                                  }
-                            : () {
-                                log('OTHER MENU');
-                              }
-                        : () {},
+                    onTap: () {
+                      showModalBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            //...
+                            return Container(
+                              color: Colors.white,
+                              child: SafeArea(
+                                  child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                color: Colors.white,
+                                child:
+                                    Modal(scenario: 'rides_main_home_options'),
+                              )),
+                            );
+                          });
+                    },
                     child: Icon(
                       Icons.settings,
                       size: 30,

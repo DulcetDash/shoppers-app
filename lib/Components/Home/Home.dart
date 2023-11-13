@@ -51,8 +51,8 @@ class _HomeState extends State<Home> {
         // print(changes);
       });
       OneSignal.shared.getDeviceState().then((deviceState) {
-        // context.read<HomeProvider>().updatePushnotification_token(
-        //     data: json.decode(deviceState?.jsonRepresentation() as String));
+        context.read<HomeProvider>().updatePushnotification_token(
+            data: json.decode(deviceState?.jsonRepresentation() as String));
         print("DeviceState: ${deviceState?.jsonRepresentation()}");
       });
     });

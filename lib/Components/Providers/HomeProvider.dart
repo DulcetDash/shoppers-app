@@ -613,7 +613,8 @@ class HomeProvider with ChangeNotifier {
 
     Map<String, String> bundleData = {
       'pushnotif_token': json.encode(pushnotif_token).toString(),
-      'user_identifier': user_fingerprint
+      'user_identifier': user_fingerprint,
+      'userNature': 'customer'
     };
 
     // print(bundleData);
