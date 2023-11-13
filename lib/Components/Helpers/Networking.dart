@@ -225,6 +225,16 @@ class GetOnlineOfflineStatus {
             "operation_clearance": 'NONE'
           });
         }
+
+        var decodedError = json.decode(response.body);
+        if (decodedError['error'] == 'ipm') {
+          //Clear everything
+          context.read<HomeProvider>().clearEverything();
+          context.read<RegistrationProvider>().clearEverything();
+          //...
+          //..
+          Navigator.of(context).pushNamed('/Entry');
+        }
       }
     } catch (e) {
       log('11');

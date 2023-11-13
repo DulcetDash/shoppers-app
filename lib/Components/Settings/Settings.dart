@@ -189,7 +189,7 @@ class _SettingsState extends State<Settings> {
                     context.read<HomeProvider>().clearEverything();
                     context.read<RegistrationProvider>().clearEverything();
                     //...
-                    Navigator.of(context).pushNamed('/');
+                    Navigator.of(context).pushNamed('/Entry');
                   })
             ],
           ),
