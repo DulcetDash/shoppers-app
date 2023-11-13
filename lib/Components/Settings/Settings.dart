@@ -163,18 +163,14 @@ class _SettingsState extends State<Settings> {
               Options(
                   title: 'Terms & Conditions',
                   actuator: () async {
-                    if (!await launch(
-                        'https://www.nejtechnologies.com/terms')) {
-                      throw 'Could not launch the URL';
-                    }
+                    await launchUrl(
+                        Uri.parse('https://dulcetdash.com/privacy'));
                   }),
               Options(
                   title: 'Privacy statements',
                   actuator: () async {
-                    if (!await launch(
-                        'https://www.nejtechnologies.com/terms')) {
-                      throw 'Could not launch the URL';
-                    }
+                    await launchUrl(
+                        Uri.parse('https://dulcetdash.com/privacy'));
                   }),
               SizedBox(
                 height: 20,

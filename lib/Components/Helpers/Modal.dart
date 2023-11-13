@@ -3,7 +3,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-// import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:shoppers_app/Components/Helpers/AppTheme.dart';
 import 'package:provider/src/provider.dart';
 import 'package:shoppers_app/Components/Helpers/Networking.dart';
@@ -25,7 +25,7 @@ class Modal extends StatelessWidget {
   }
 
   void _callNumber({required String phone}) async {
-    // bool? res = await FlutterPhoneDirectCaller.callNumber(phone);
+    bool? res = await FlutterPhoneDirectCaller.callNumber(phone);
   }
 
   //Return the correct content based on the scenario

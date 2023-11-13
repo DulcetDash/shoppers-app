@@ -235,10 +235,8 @@ class _RegistrationRideIndividualState
                                 left: 5, right: 5, bottom: 25),
                             child: InkWell(
                               onTap: () async {
-                                if (!await launch(
-                                    'https://www.nejtechnologies.com')) {
-                                  throw 'Could not launch the URL';
-                                }
+                                await launchUrl(Uri.parse(
+                                    'https://dulcetdash.com/privacy'));
                               },
                               child: RichText(
                                   text: TextSpan(

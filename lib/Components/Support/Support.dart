@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:shoppers_app/Components/Helpers/AppTheme.dart';
 
 class Support extends StatefulWidget {
@@ -70,13 +70,13 @@ class _SupportState extends State<Support> {
                 title: 'Contact DulcetDash',
                 icon: Icon(Icons.phone, color: AppTheme().getSecondaryColor()),
                 isTitleBold: true,
-                actuator: () => _callNumber(phone: '+264814400089')),
+                actuator: () => _callNumber(phone: '+264856997167')),
             const SizedBox(height: 25),
             Options(
                 title: 'Call City Police',
                 icon: Icon(Icons.shield, color: Color.fromRGBO(178, 34, 34, 1)),
                 isTitleBold: true,
-                actuator: () => _callNumber(phone: '+2646110111'))
+                actuator: () => _callNumber(phone: '10111'))
           ],
         ),
       ),
@@ -84,7 +84,7 @@ class _SupportState extends State<Support> {
   }
 
   void _callNumber({required String phone}) async {
-    // bool? res = await FlutterPhoneDirectCaller.callNumber(phone);
+    bool? res = await FlutterPhoneDirectCaller.callNumber(phone);
   }
 }
 

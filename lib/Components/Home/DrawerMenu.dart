@@ -122,14 +122,12 @@ class _DrawerMenuState extends State<DrawerMenu> {
                       child: ListTile(
                         leading: InkWell(
                             onTap: () async {
-                              if (!await launch(
-                                  'https://www.nejtechnologies.com')) {
-                                throw 'Could not launch the URL';
-                              }
+                              await launchUrl(
+                                  Uri.parse('https://dulcetdash.com/privacy'));
                             },
                             child: const Text('Legal',
                                 style: TextStyle(fontSize: 16))),
-                        trailing: const Text('v1.6.3',
+                        trailing: const Text('v1.0.0',
                             style: TextStyle(fontSize: 16, color: Colors.grey)),
                       ),
                     ))),
