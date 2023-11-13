@@ -7,6 +7,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shoppers_app/Components/Helpers/SecureStorageService.dart';
 import 'package:shoppers_app/Components/Providers/HomeProvider.dart';
 
 class Watcher with ChangeNotifier {
@@ -20,8 +21,16 @@ class Watcher with ChangeNotifier {
       Duration? timerInterval = const Duration(seconds: 10),
       required BuildContext context}) {
     //Start the timer
-    mainLoop = Timer.periodic(timerInterval!, (Timer t) {
+    mainLoop = Timer.periodic(timerInterval!, (Timer t) async {
       for (int i = 0; i < actuatorFunctions.length; i++) {
+        String? permaToken =
+            await SecureStorageService().getValue('permaToken');
+
+        if (permaToken == null) {
+          log('No valid context detected! - skipping timer');
+          continue;
+        }
+
         if (context.read<HomeProvider>().user_fingerprint == 'NONE' ||
             context.read<HomeProvider>().user_fingerprint == null ||
             context.read<HomeProvider>().user_fingerprint == '') {
