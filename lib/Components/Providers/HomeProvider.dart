@@ -25,7 +25,7 @@ class HomeProvider with ChangeNotifier {
   Map pushnotif_token = {}; //Notification token
 
   Map<dynamic, dynamic> onlineOfflineData = {
-    'flag': 'offline'
+    'flag': ''
   }; //! Will hold the online/offline and suspension status of the driver
 
   Map<String, bool> goingOnlineOfflineVars = {
@@ -665,7 +665,7 @@ class HomeProvider with ChangeNotifier {
   bool isTheShoppingListCompleted({required List packagesList}) {
     List newList = List.from(packagesList);
     newList.removeWhere((element) =>
-        element['isCompleted'] != true || element['isNotFound'] != true);
+        element['isCompleted'] != null || element['isNotFound'] != null);
 
     return newList.isEmpty;
   }

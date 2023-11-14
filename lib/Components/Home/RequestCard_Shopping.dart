@@ -547,7 +547,7 @@ class ShowProductsQuick extends StatelessWidget {
                         children: [
                           Text(
                             '${requestData['delivery_basic_infos']['shopping_list'].length}',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontFamily: 'MoveTextMedium', fontSize: 16),
                           ),
                           SizedBox(
@@ -564,15 +564,16 @@ class ShowProductsQuick extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.shopping_cart,
                             size: 18,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 3,
                           ),
                           Text(
-                            'N\$40',
+                            requestData['delivery_basic_infos']
+                                ['totals_delivery']['total'],
                             style: TextStyle(
                                 fontFamily: 'MoveBold',
                                 fontSize: 19,
@@ -672,7 +673,7 @@ class ProductModel extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(fontSize: 14, fontFamily: 'MoveText'),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Text(
@@ -685,12 +686,12 @@ class ProductModel extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(child: SizedBox.shrink()),
+          const Expanded(child: SizedBox.shrink()),
           Container(
             child: Column(
               children: [
                 Text(
-                  '${productData['price']}',
+                  'N\$${productData['price']}',
                   style: TextStyle(
                       fontSize: 15, color: AppTheme().getPrimaryColor()),
                 ),

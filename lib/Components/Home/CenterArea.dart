@@ -41,7 +41,9 @@ class _CenterAreaState extends State<CenterArea> {
                       .locationServicesStatus['isLocationPermissionGranted'] &&
                   context.watch<HomeProvider>().locationServicesStatus['isLocationDeniedForever'] ==
                       false
-              ? context.watch<HomeProvider>().tripRequestsData.isNotEmpty
+              ? context.watch<HomeProvider>().tripRequestsData.isNotEmpty &&
+                      context.watch<HomeProvider>().onlineOfflineData['flag'] ==
+                          'online'
                   ? ListView.separated(
                       padding: const EdgeInsets.only(top: 20, bottom: 70),
                       itemBuilder: (context, index) =>
@@ -61,12 +63,13 @@ class _CenterAreaState extends State<CenterArea> {
                                       requestData: context
                                           .watch<HomeProvider>()
                                           .tripRequestsData[index]),
-                      separatorBuilder: (context, index) =>
-                          const Padding(padding: EdgeInsets.only(top: 15)),
+                      separatorBuilder: (context, index) => const Padding(padding: EdgeInsets.only(top: 15)),
                       itemCount: context.read<HomeProvider>().tripRequestsData.length)
                   : context.watch<HomeProvider>().onlineOfflineData['flag'] == 'offline'
                       ? const OfflineWindow()
-                      : const EmptyTripsWindow()
+                      : context.watch<HomeProvider>().onlineOfflineData['flag'] == ''
+                          ? const OfflineWindow()
+                          : const EmptyTripsWindow()
               : const RequestLocationWindow()),
     ));
   }
