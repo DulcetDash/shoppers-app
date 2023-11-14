@@ -218,6 +218,42 @@ class _TripDetails_DeliveryState extends State<TripDetails_Delivery> {
               PaymentPassengersStrip(
                 tripData: tripData,
               ),
+              //Customer note if any
+              tripData['delivery_basic_infos']['pickup_note'] != null
+                  ? Padding(
+                      padding: const EdgeInsets.only(top: 15, bottom: 15),
+                      child: Container(
+                        child: ListTile(
+                          horizontalTitleGap: 0,
+                          leading: const Column(
+                            children: [
+                              Icon(
+                                Icons.info,
+                                color: Colors.grey,
+                              ),
+                            ],
+                          ),
+                          title: const Text('Customer note'),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                  tripData['delivery_basic_infos']
+                                          ['pickup_note'] ??
+                                      '',
+                                  style: const TextStyle(fontSize: 16)),
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+              tripData['delivery_basic_infos']['pickup_note'] != null
+                  ? const Divider()
+                  : const SizedBox.shrink(),
               //Ride style details
               Padding(
                 padding: const EdgeInsets.only(top: 15, bottom: 15),
@@ -226,16 +262,16 @@ class _TripDetails_DeliveryState extends State<TripDetails_Delivery> {
                     horizontalTitleGap: 0,
                     leading: Column(
                       children: [
-                        Icon(Icons.info),
+                        Icon(Icons.info, color: AppTheme().getSecondaryColor()),
                       ],
                     ),
-                    title: Text('Note'),
-                    subtitle: Text(
+                    title: const Text('Keep in mind'),
+                    subtitle: const Text(
                         'Please confirm the dropoff of all the individual packages as you drop them off.'),
                   ),
                 ),
               ),
-              Divider(),
+              const Divider(),
               // Cancel trips?
               Visibility(
                 visible: tripData['delivery_basic_infos']['inRouteToDropoff'] ==
@@ -244,18 +280,18 @@ class _TripDetails_DeliveryState extends State<TripDetails_Delivery> {
                   children: [
                     InkWell(
                       onTap: () => CancelRequest(context: context),
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
+                      child: const Padding(
+                        padding: EdgeInsets.only(top: 8.0),
                         child: ListTile(
                             horizontalTitleGap: 0,
-                            leading: const Icon(Icons.not_interested,
+                            leading: Icon(Icons.not_interested,
                                 color: Color.fromRGBO(178, 34, 34, 1)),
                             title: Text('Cancel the delivery',
-                                style: const TextStyle(
+                                style: TextStyle(
                                     fontFamily: 'MoveTextRegular',
                                     fontSize: 18,
                                     color: Color.fromRGBO(178, 34, 34, 1))),
-                            trailing: const Icon(Icons.arrow_forward_ios,
+                            trailing: Icon(Icons.arrow_forward_ios,
                                 color: Color.fromRGBO(178, 34, 34, 1),
                                 size: 12)),
                       ),
