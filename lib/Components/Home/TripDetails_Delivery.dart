@@ -219,7 +219,9 @@ class _TripDetails_DeliveryState extends State<TripDetails_Delivery> {
                 tripData: tripData,
               ),
               //Customer note if any
-              tripData['delivery_basic_infos']['pickup_note'] != null
+              tripData['delivery_basic_infos']['pickup_note'] != null &&
+                      tripData['delivery_basic_infos']?['pickup_note']
+                          ?.isNotEmpty
                   ? Padding(
                       padding: const EdgeInsets.only(top: 15, bottom: 15),
                       child: Container(
@@ -251,7 +253,9 @@ class _TripDetails_DeliveryState extends State<TripDetails_Delivery> {
                       ),
                     )
                   : const SizedBox.shrink(),
-              tripData['delivery_basic_infos']['pickup_note'] != null
+              tripData['delivery_basic_infos']['pickup_note'] != null &&
+                      tripData['delivery_basic_infos']?['pickup_note']
+                          ?.isNotEmpty
                   ? const Divider()
                   : const SizedBox.shrink(),
               //Ride style details
