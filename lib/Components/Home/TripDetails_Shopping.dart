@@ -266,6 +266,42 @@ class _TripDetails_ShoppingState extends State<TripDetails_Shopping> {
               PaymentPassengersStrip(
                 tripData: tripData,
               ),
+              //Customer note if any
+              tripData['delivery_basic_infos']['pickup_note'] != null
+                  ? Padding(
+                      padding: const EdgeInsets.only(top: 15, bottom: 15),
+                      child: Container(
+                        child: ListTile(
+                          horizontalTitleGap: 0,
+                          leading: const Column(
+                            children: [
+                              Icon(
+                                Icons.info,
+                                color: Colors.grey,
+                              ),
+                            ],
+                          ),
+                          title: const Text('Customer note'),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                  tripData['delivery_basic_infos']
+                                          ['pickup_note'] ??
+                                      '',
+                                  style: const TextStyle(fontSize: 16)),
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+              tripData['delivery_basic_infos']['pickup_note'] != null
+                  ? const Divider()
+                  : const SizedBox.shrink(),
               //Ride style details
               Padding(
                 padding: const EdgeInsets.only(top: 15, bottom: 15),
@@ -280,18 +316,18 @@ class _TripDetails_ShoppingState extends State<TripDetails_Shopping> {
                         ),
                       ],
                     ),
-                    title: Text('Security PIN'),
+                    title: const Text('Security PIN'),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                             'Please provide it to the customer upon request after confirming the name.'),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Text(
                           '${tripData['security']['pin']}',
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontFamily: 'MoveTextBold',
                               fontSize: 18,
                               color: Colors.black),

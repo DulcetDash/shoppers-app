@@ -67,9 +67,6 @@ class _SignupEntryState extends State<SignupEntry> {
               const SizedBox(
                 height: 35,
               ),
-              const DotPoints(
-                title: 'Accept ride requests',
-              ),
               const DotPoints(title: 'Deliver packages locally.'),
               const DotPoints(title: 'Make shopping locally.'),
               const DotPoints(title: 'Very convenient payment.'),
@@ -104,9 +101,9 @@ class _SignupEntryState extends State<SignupEntry> {
                               children: [
                             TextSpan(
                                 text:
-                                    'Formore details, check out our terms and conditions are available at '),
+                                    'For more details, check out our terms and conditions are available at '),
                             TextSpan(
-                                text: 'nejtechnologies.com/terms',
+                                text: 'https://dulcetdash.com/terms',
                                 style: TextStyle(fontFamily: 'MoveTextMedium'))
                           ])),
                       // Text(

@@ -664,7 +664,8 @@ class HomeProvider with ChangeNotifier {
   //?38. Check if the driver has completed the delivery list - shopping
   bool isTheShoppingListCompleted({required List packagesList}) {
     List newList = List.from(packagesList);
-    newList.removeWhere((element) => element['isCompleted'] != true);
+    newList.removeWhere((element) =>
+        element['isCompleted'] != true || element['isNotFound'] != true);
 
     return newList.isEmpty;
   }

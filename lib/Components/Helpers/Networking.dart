@@ -1966,7 +1966,6 @@ class CheckOTPCodeNet {
 
       if (response.statusCode == 200) //Got some results
       {
-        // log(response.body.toString());
         Map responseGot = json.decode(response.body);
 
         if (responseGot['response'] == false) //Some random error happended
