@@ -40,35 +40,31 @@ class _HomeState extends State<Home> {
       // The promptForPushNotificationsWithUserResponse function will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
       OneSignal.shared
           .promptUserForPushNotificationPermission()
-          .then((accepted) {
-        // print("Accepted permission: $accepted");
-      });
+          .then((accepted) {});
 
       OneSignal.shared
           .setSubscriptionObserver((OSSubscriptionStateChanges changes) {
         // Will be called whenever the subscription changes
         // (ie. user gets registered with OneSignal and gets a user ID)
-        // print(changes);
       });
       OneSignal.shared.getDeviceState().then((deviceState) {
         context.read<HomeProvider>().updatePushnotification_token(
             data: json.decode(deviceState?.jsonRepresentation() as String));
-        print("DeviceState: ${deviceState?.jsonRepresentation()}");
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(milliseconds: 1)).then(
-        (value) => SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-              systemNavigationBarColor: Colors.black,
-              systemNavigationBarDividerColor: Colors.black,
-              systemNavigationBarIconBrightness: Brightness.light,
-              statusBarColor: Colors.black,
-              statusBarBrightness: Brightness.light,
-              statusBarIconBrightness: Brightness.light,
-            )));
+    Future.delayed(Duration(milliseconds: 1)).then((value) =>
+        SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+          systemNavigationBarColor: Colors.black,
+          systemNavigationBarDividerColor: Colors.black,
+          systemNavigationBarIconBrightness: Brightness.light,
+          statusBarColor: Colors.black,
+          statusBarBrightness: Brightness.light,
+          statusBarIconBrightness: Brightness.light,
+        )));
 
     return WillPopScope(
       onWillPop: () async {
