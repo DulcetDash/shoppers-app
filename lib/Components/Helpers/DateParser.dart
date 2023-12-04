@@ -9,13 +9,13 @@ class DateParser {
   String getReadableTime() {
     DateTime dateTime = DateTime.parse(dateString);
 
-    return '${dateTime.hour}:${dateTime.minute}';
+    return '${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}';
   }
 
   //?2. Get normal readable date
   String getReadableDate() {
     DateTime dateTime = DateTime.parse(dateString);
 
-    return '${dateTime.day}-${dateTime.month}-${dateTime.year} at ${getReadableTime()}';
+    return '${dateTime.day.toString().padLeft(2, '0')}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.year} at ${getReadableTime()}';
   }
 }

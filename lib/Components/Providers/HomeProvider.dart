@@ -17,8 +17,8 @@ import 'package:shoppers_app/Components/Providers/RegistrationProvider.dart';
 // Will hold all the home related globals - only!
 
 class HomeProvider with ChangeNotifier {
-  // final String bridge = 'http://192.168.178.93:9697';
-  final String bridge = 'https://api.dulcetdash.com';
+  final String bridge = 'http://192.168.178.93:9697';
+  // final String bridge = 'https://api.dulcetdash.com';
 
   late AnimationController controllerSwicther; //The bottom switcher animator
 
@@ -575,10 +575,8 @@ class HomeProvider with ChangeNotifier {
 
   //? 34. Update the pushnotif_token
   void updatePushnotification_token({required var data}) async {
-    // log(data.toString());
     pushnotif_token = data;
-    // peristDataMap();
-    //...Upload
+
     Uri mainUrl =
         Uri.parse(Uri.encodeFull('$bridge/receivePushNotification_token'));
 
@@ -640,7 +638,7 @@ class HomeProvider with ChangeNotifier {
   Map<String, String> getCleanPaymentMethod_nameAndImage(
       {required String payment}) {
     return {
-      'name': payment == 'cash' ? 'Cash' : 'Ewallet',
+      'name': payment == 'cash' ? 'Cash' : 'Wallet',
       'image': payment == 'mobile_money'
           ? 'assets/Images/mobile_payment.png'
           : 'assets/Images/banknote.png'

@@ -525,7 +525,6 @@ class ShowProductsQuick extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(requestData);
     return SafeArea(
       top: false,
       child: Container(
@@ -533,7 +532,6 @@ class ShowProductsQuick extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                // color: Colors.red,
                 height: 55,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 15, right: 15),
@@ -572,11 +570,10 @@ class ShowProductsQuick extends StatelessWidget {
                             width: 3,
                           ),
                           Text(
-                            requestData['delivery_basic_infos']
-                                ['totals_delivery']['total'],
+                            'N\$${requestData['delivery_basic_infos']['totals_delivery']['cart'].toString()}',
                             style: TextStyle(
                                 fontFamily: 'MoveBold',
-                                fontSize: 19,
+                                fontSize: 22,
                                 color: AppTheme().getPrimaryColor()),
                           )
                         ],
@@ -585,19 +582,20 @@ class ShowProductsQuick extends StatelessWidget {
                   ),
                 ),
               ),
-              Divider(
+              const Divider(
                 height: 0,
                 thickness: 1,
               ),
               Expanded(
                   child: ListView.separated(
-                      padding: EdgeInsets.only(left: 15, right: 15, top: 25),
+                      padding:
+                          const EdgeInsets.only(left: 15, right: 15, top: 25),
                       itemBuilder: (context, index) => ProductModel(
                             indexProduct: index + 1,
                             productData: requestData['delivery_basic_infos']
                                 ['shopping_list'][index],
                           ),
-                      separatorBuilder: (context, index) => Divider(),
+                      separatorBuilder: (context, index) => const Divider(),
                       itemCount: requestData['delivery_basic_infos']
                               ['shopping_list']
                           .length))
@@ -677,7 +675,7 @@ class ProductModel extends StatelessWidget {
                   height: 10,
                 ),
                 Text(
-                  '${getItemsNumber()} •  ${productData['meta']['store']}',
+                  '${getItemsNumber()} • ${productData['meta']['store']}',
                   style: TextStyle(
                       color: Colors.grey.shade600,
                       fontSize: 16,
@@ -693,7 +691,7 @@ class ProductModel extends StatelessWidget {
                 Text(
                   'N\$${productData['price']}',
                   style: TextStyle(
-                      fontSize: 15, color: AppTheme().getPrimaryColor()),
+                      fontSize: 20, color: AppTheme().getPrimaryColor()),
                 ),
               ],
             ),
